@@ -1,0 +1,6 @@
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab3\bin\Debug\Lab3.exe.config
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab3\bin\Debug\Lab3.exe
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab3\bin\Debug\Lab3.pdb
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab3\obj\Debug\Lab3.csprojAssemblyReference.cache
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab3\obj\Debug\Lab3.exe
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab3\obj\Debug\Lab3.pdb

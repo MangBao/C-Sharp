@@ -1,0 +1,6 @@
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\KIEMTRA\obj\Debug\KIEMTRA.csprojAssemblyReference.cache
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\KIEMTRA\bin\Debug\KIEMTRA.exe.config
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\KIEMTRA\bin\Debug\KIEMTRA.exe
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\KIEMTRA\bin\Debug\KIEMTRA.pdb
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\KIEMTRA\obj\Debug\KIEMTRA.exe
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\KIEMTRA\obj\Debug\KIEMTRA.pdb

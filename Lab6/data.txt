@@ -1,0 +1,9 @@
+Lap trinh HDT
+SOT331
+3
+Tin hoc co so
+SOT303
+2
+Nhap mon lap trinh
+SOT315
+3

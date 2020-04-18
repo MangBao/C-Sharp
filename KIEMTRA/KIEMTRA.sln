@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KIEMTRA", "KIEMTRA.csproj", "{96AE8F77-1531-4312-AFB2-1F321F6E3CDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96AE8F77-1531-4312-AFB2-1F321F6E3CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96AE8F77-1531-4312-AFB2-1F321F6E3CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96AE8F77-1531-4312-AFB2-1F321F6E3CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96AE8F77-1531-4312-AFB2-1F321F6E3CDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3360E677-BDD6-40B1-B023-674AF0DA6E89}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,11 @@
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab6\bin\Debug\Lab6.exe.config
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab6\bin\Debug\Lab6.exe
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab6\bin\Debug\Lab6.pdb
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab6\obj\Debug\Lab6.csprojAssemblyReference.cache
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab6\obj\Debug\Lab6.Properties.Resources.resources
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab6\obj\Debug\Lab6.csproj.GenerateResource.cache
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab6\obj\Debug\Lab6.exe
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab6\obj\Debug\Lab6.pdb
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab6\obj\Debug\Lab6.BT1.resources
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab6\obj\Debug\Lab6.BT2.resources
+C:\Users\ASUS\Documents\Visual Studio 2019\Project\Lab6\obj\Debug\Lab6.BT3.resources
