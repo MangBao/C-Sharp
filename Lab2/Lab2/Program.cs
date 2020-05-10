@@ -51,19 +51,21 @@ namespace Lab2
         static void bai1()
         {
             int a, b, c;
-            Console.Write("Nhap a,b,c: ");
+            Console.Write("Nhap a: ");
             a = int.Parse(Console.ReadLine());
+            Console.Write("Nhap b: ");
             b = int.Parse(Console.ReadLine());
+            Console.Write("Nhap c: ");
             c = int.Parse(Console.ReadLine());
             PTB2 pt = new PTB2(a, b, c);
             pt.GiaiPTB2();
         }
         static void Main(string[] args)
         {
-            bai4();
+            //bai4();
             //bai3();
             //bai2();
-            //bai1();
+            bai1();            
             Console.ReadKey();
         }
     }

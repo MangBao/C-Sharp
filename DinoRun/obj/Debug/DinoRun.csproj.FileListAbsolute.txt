@@ -7,3 +7,10 @@ C:\Users\ASUS\Documents\Visual Studio 2019\Project\DinoRun\obj\Debug\DinoRun.Pro
 C:\Users\ASUS\Documents\Visual Studio 2019\Project\DinoRun\obj\Debug\DinoRun.csproj.GenerateResource.cache
 C:\Users\ASUS\Documents\Visual Studio 2019\Project\DinoRun\obj\Debug\DinoRun.exe
 C:\Users\ASUS\Documents\Visual Studio 2019\Project\DinoRun\obj\Debug\DinoRun.pdb
+E:\C#\DinoRun\obj\Debug\DinoRun.csprojAssemblyReference.cache
+E:\C#\DinoRun\obj\Debug\DinoRun.Form1.resources
+E:\C#\DinoRun\obj\Debug\DinoRun.Properties.Resources.resources
+E:\C#\DinoRun\obj\Debug\DinoRun.csproj.GenerateResource.cache
+E:\C#\DinoRun\obj\Debug\DinoRun.csproj.CoreCompileInputs.cache
+E:\C#\DinoRun\obj\Debug\DinoRun.exe
+E:\C#\DinoRun\obj\Debug\DinoRun.pdb
