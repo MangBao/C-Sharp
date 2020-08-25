@@ -61,6 +61,7 @@
             this.dino.Size = new System.Drawing.Size(100, 95);
             this.dino.TabIndex = 0;
             this.dino.TabStop = false;
+            this.dino.Click += new System.EventHandler(this.dino_Click);
             // 
             // tree1
             // 

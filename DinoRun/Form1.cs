@@ -110,9 +110,14 @@ namespace DinoRun
                 dino.Top += 20 ;
                 /*if()
                 dino.Location = new Point(x_dino, y_dino);*/
-                if(dino.Top)
+                //if(dino.Top)
             }
             
+        }
+
+        private void dino_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)

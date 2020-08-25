@@ -14,3 +14,13 @@ E:\C#\DinoRun\obj\Debug\DinoRun.csproj.GenerateResource.cache
 E:\C#\DinoRun\obj\Debug\DinoRun.csproj.CoreCompileInputs.cache
 E:\C#\DinoRun\obj\Debug\DinoRun.exe
 E:\C#\DinoRun\obj\Debug\DinoRun.pdb
+E:\C-Sharp\DinoRun\obj\Debug\DinoRun.csprojAssemblyReference.cache
+E:\C-Sharp\DinoRun\obj\Debug\DinoRun.Form1.resources
+E:\C-Sharp\DinoRun\obj\Debug\DinoRun.Properties.Resources.resources
+E:\C-Sharp\DinoRun\obj\Debug\DinoRun.csproj.GenerateResource.cache
+E:\C-Sharp\DinoRun\obj\Debug\DinoRun.csproj.CoreCompileInputs.cache
+E:\C-Sharp\DinoRun\obj\Debug\DinoRun.exe
+E:\C-Sharp\DinoRun\obj\Debug\DinoRun.pdb
+E:\C-Sharp\DinoRun\bin\Debug\DinoRun.exe.config
+E:\C-Sharp\DinoRun\bin\Debug\DinoRun.exe
+E:\C-Sharp\DinoRun\bin\Debug\DinoRun.pdb

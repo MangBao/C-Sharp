@@ -1,0 +1,7 @@
+E:\C-Sharp\Cau_Truc_Lenh_Co_Ban\Cau_Truc_Lenh_Co_Ban\bin\Debug\Cau_Truc_Lenh_Co_Ban.exe.config
+E:\C-Sharp\Cau_Truc_Lenh_Co_Ban\Cau_Truc_Lenh_Co_Ban\bin\Debug\Cau_Truc_Lenh_Co_Ban.exe
+E:\C-Sharp\Cau_Truc_Lenh_Co_Ban\Cau_Truc_Lenh_Co_Ban\bin\Debug\Cau_Truc_Lenh_Co_Ban.pdb
+E:\C-Sharp\Cau_Truc_Lenh_Co_Ban\Cau_Truc_Lenh_Co_Ban\obj\Debug\Cau_Truc_Lenh_Co_Ban.csprojAssemblyReference.cache
+E:\C-Sharp\Cau_Truc_Lenh_Co_Ban\Cau_Truc_Lenh_Co_Ban\obj\Debug\Cau_Truc_Lenh_Co_Ban.csproj.CoreCompileInputs.cache
+E:\C-Sharp\Cau_Truc_Lenh_Co_Ban\Cau_Truc_Lenh_Co_Ban\obj\Debug\Cau_Truc_Lenh_Co_Ban.exe
+E:\C-Sharp\Cau_Truc_Lenh_Co_Ban\Cau_Truc_Lenh_Co_Ban\obj\Debug\Cau_Truc_Lenh_Co_Ban.pdb

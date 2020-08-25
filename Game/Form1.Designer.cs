@@ -53,6 +53,7 @@
             this.ongtren1.Size = new System.Drawing.Size(271, 1001);
             this.ongtren1.TabIndex = 0;
             this.ongtren1.TabStop = false;
+            this.ongtren1.Click += new System.EventHandler(this.ongtren1_Click);
             // 
             // ongtren2
             // 

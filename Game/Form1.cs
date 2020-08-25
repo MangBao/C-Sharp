@@ -78,6 +78,11 @@ namespace Game
             lbldiem.Text = "Score: " + diem.ToString();//Ghi điểm sau khi qua mỗi ống
         }
 
+        private void ongtren1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void timer2_Tick(object sender, EventArgs e)
         {
             // DoubleBuffer => hiệu chỉnh không bị giựt màn hình.
