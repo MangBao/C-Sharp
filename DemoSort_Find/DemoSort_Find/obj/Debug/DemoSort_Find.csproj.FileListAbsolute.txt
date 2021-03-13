@@ -1,0 +1,10 @@
+E:\C-Sharp\DemoSort_Find\DemoSort_Find\bin\Debug\DemoSort_Find.exe.config
+E:\C-Sharp\DemoSort_Find\DemoSort_Find\bin\Debug\DemoSort_Find.exe
+E:\C-Sharp\DemoSort_Find\DemoSort_Find\bin\Debug\DemoSort_Find.pdb
+E:\C-Sharp\DemoSort_Find\DemoSort_Find\obj\Debug\DemoSort_Find.csprojAssemblyReference.cache
+E:\C-Sharp\DemoSort_Find\DemoSort_Find\obj\Debug\DemoSort_Find.Form1.resources
+E:\C-Sharp\DemoSort_Find\DemoSort_Find\obj\Debug\DemoSort_Find.Properties.Resources.resources
+E:\C-Sharp\DemoSort_Find\DemoSort_Find\obj\Debug\DemoSort_Find.csproj.GenerateResource.cache
+E:\C-Sharp\DemoSort_Find\DemoSort_Find\obj\Debug\DemoSort_Find.csproj.CoreCompileInputs.cache
+E:\C-Sharp\DemoSort_Find\DemoSort_Find\obj\Debug\DemoSort_Find.exe
+E:\C-Sharp\DemoSort_Find\DemoSort_Find\obj\Debug\DemoSort_Find.pdb

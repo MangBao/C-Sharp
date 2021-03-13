@@ -1,0 +1,310 @@
+﻿a/ Truy vấn đơn giản
+1/Cho biết tên các dụng cụ có ký tự đầu tiên là "M" và kí tự cuối cùng là "Ô".
+select TenDC 
+from DungCu
+where TenDC like 'M%ô'
+2/Cho biết mã và tên sách có giá bán sách <= 20000.
+select a.MaSach, TenSach
+from Sach a,ChiTietHDS b
+where (a.MaSach = b.MaSach) AND (GiaBanS <= 20000)
+3/Hiển thị tên sách, thể loại, tên tác giả có giá nhập giảm dần.
+select TenSach, TenTL, d.TenTG,GiaNhapS from Sach a join TheLoai b on a.MaTL=b.MaTL join Sach_TG c
+on a.MaSach=c.MaSach join TacGia d on c.MaTG=d.MaTG join ChiTietPNS e on a.MaSach=e.MaSach
+order by GiaNhapS desc
+===================================================================================
+b/ Truy vấn với Aggregate Functions:
+1/ có bao nhiêu sách do tác giả Tố Hữu viết
+select count(*) as 'Số Sách' from Sach 
+where TenTG= N'Tố Hữu'
+2/ Cho biết tổng số lượng dụng cụ có trong hóa đơn có mã hóa đơn 'HD05'.
+select sum(SoLuongDC) as N'Tổng số lượng dụng cụ'
+from ChiTietHDDC a JOIN HoaDon b ON (a.MaHDDC = b.MaHDDC) 
+where b.SoHD = 'HD05'
+3/ Cho biết giá trị trung bình của số lượng sách được nhập vào.
+select  avg(SoLuongNhapS) as 'Số lượng' 
+from ChiTietPNS 
+4/ Cho biết có bao nhiêu dụng cụ có giá bán dụng cụ >10000.
+select count(MaDC) as 'số dụng cụ' from DungCu
+where GiaBanDC>10000
+5/ Cho biết tổng số lượng dụng cụ có trong hóa đơn và có mã chi tiết dụng cụ là 'CTHDDC01'
+select sum(SoLuongDC) as 'Tổng'
+from ChiTietHDDC a join HoaDon b on a.MaHDDC=b.MaHDDC
+where b.MaHDDC='CTHDDC01'
+6/cho biết mã sách, tên sách và số tác giả viết sách ‘tiểu thuyết’
+select a.MaSach, TenSach, count(c.MaTG) as 'Số tác giả'
+from Sach a join TheLoai b on a.MaTL=b.MaTL join Sach_TG c on a.MaSach=c.MaSach
+where TenTL=N'Tiểu thuyết'
+group by a.MaSach, TenSach
+7/Tổng số tiền mà khách khàng N'Võ Hoài Lâm' phải trả cho việc mua sách là
+select TenKH, sum(GiaBanS) as 'Số tiền trả '
+from KhachHang a join HoaDon b on a.MaKH=b.MaKH join ChiTietHDS c on b.MaHDS=c.MaHDS
+where TenKH=N'Võ Hoài Lâm'
+group by TenKH
+
+===================================================================================
+c/ Truy vấn với mệnh đề having:
+1/ Cho biết mã tác giả, tên tác giả chỉ mới viết đúng 1 sách 
+select a.MaTG,TenTG from TacGia a join Sach_TG b on a.MaTG=b.MaTG
+group by a.MaTG,TenTG
+having count(MaSach)=1
+2/ Cho biết mã, tên dụng cụ có số lượng nhập lớn hơn 90 sản phẩm.
+select a.MaDC, TenDC from DungCu a join ChiTietPNDC b on a.MaDC=b.MaDC
+group by a.MaDC, TenDC
+having max(SoLuongNhapDC)>90
+3/ liệt kê mã sách, tên sách được viết bởi 3 tác giả mà khách hàng mua
+select d.MaSach, TenSach from KhachHang a join HoaDon b on a.MaKH=b.MaKH
+join ChiTietHDS c on b.MaHDS=c.MaHDS join Sach d on c.MaSach=d.MaSach join Sach_TG e on d.MaSach=e.MaSach
+group by a.MaKH, TenKH, d.MaSach, TenSach
+having count(e.MaTG)=3
+4/ Cho biết tên khách hàng chỉ mới mua đúng một dụng cụ học tập và một cuốn sách.
+select TenKH from KhachHang a join HoaDon b on a.MaKH=b.MaKH join ChiTietHDDC c on b.MaHDDC=c.MaHDDC
+join DungCu d on c.MaDC=d.MaDC
+group by TenKH
+having count(b.MaHDDC)=1
+5/ cho biết tên nhà xuất bản cung cấp đúng 1 loại sách ****
+select TenNXB from NhaXuatBan a join NhaCungCap b on a.MaNXB=b.MaNXB join PhieuNhap c on b.MaNCC=c.MaNCC
+join ChiTietPNS d on c.SoCTPNS=d.SoCTPNS join Sach e on d.MaSach=e.MaSach
+group by TenNXB
+having count(e.MaSach)=1
+===================================================================================
+d/ Truy vấn lớn nhất, nhỏ nhất:
+1/ cho biết mã sách, tên sách được viết bởi nhiều tác giả nhất
+select a.MaDC, TenDC 
+from DungCu a join ChiTietPNDC b on a.MaDC=b.MaDC
+where GiaNhapDC <=all (select GiaNhapDC from ChiTietPNDC)
+2/cho biết tên nhà xuất bản có số lượng nhập sách lớn nhất
+select TenNXB from NhaXuatBan a join NhaCungCap b on a.MaNXB=b.MaNXB join PhieuNhap c on b.MaNCC=c.MaNCC
+join ChiTietPNS d on c.SoCTPNS=d.SoCTPNS
+where SoLuongNhapS >=all(select SoLuongNhapS from ChiTietPNS)
+3/ Cho biết mã dụng cụ,tên dụng cụ và giá nhập dụng cụ có giá nhập bé nhất.
+select a.MaDC,TenDC, GiaNhapDC from DungCu a join ChiTietPNDC b on a.MaDC=b.MaDC
+where GiaNhapDC<=all(select GiaNhapDC from ChiTietPNDC)
+4/cho biết tên, tuổi khách hàng nữ lớn tuổi nhất
+select TenKH,DATEDIFF(YEAR,NgaySinh,getdate()) as 'Tuổi' from KhachHang
+where GioiTinh=1 
+group by TenKH,NgaySinh 
+having DATEDIFF(YEAR,NgaySinh,getdate()) >=all (select DATEDIFF(YEAR,NgaySinh,getdate()) from KhachHang
+				where GioiTinh=1 )	
+===================================================================================
+e/ Truy vấn không/chưa có: (Not in, left/right join)
+1/ Cho biết tên sách không được xuất bản vào năm 2000
+select TenSach  
+from Sach  
+where NgayXB  not in (select NgayXB  from Sach where NgayXB like '%2000%')
+2/ Cho biết mã sách không được mã tác giả "TG01" viết
+select MaSach from Sach a join TacGia b on (a.TenTG = b.TenTG)
+where MaTG not in (select MaTG from TacGia where MaTG = 'TG01')
+3/ Cho biết mã tác giả, tên tác giả không có địa chỉ ở "Quảng Nam"
+select MaTG,TenTG 
+from TacGia 
+where DiaChiTG not in (select DiaChiTG from TacGia where DiaChiTG LIKE N'%Quảng Nam%')
+4/ liệt kê tên, số điện thoại của khách hàng không mua dụng cụ
+select distinct TenKH,DienThoaiKH from KhachHang a left join HoaDon b on a.MaKH=b.MaKH
+left join ChiTietHDDC c on b.MaHDDC=c.MaHDDC
+where b.MaHDDC is null
+5/ Cho biết chi tiết sách chưa đc mua bởi khách hàng có mã 'KH005'
+select distinct a.MaSach,TenSach from Sach a join ChiTietHDS b on a.MaSach=b.MaSach
+join HoaDon c on b.MaHDS=c.MaHDS join KhachHang d on c.MaKH=d.MaKH
+where c.MaHDS not in (select MaHDS  from HoaDon 
+					 where MaKH='KH005')
+6/ Tên nhà xuất bản không cung cấp sách tên "Mắt biếc" hoặc Vợ Nhặt
+select TenNXB from NhaXuatBan a join NhaCungCap b on a.MaNXB=b.MaNXB join PhieuNhap c on b.MaNCC=c.MaNCC
+join ChiTietPNS d on c.SoCTPNS=d.SoCTPNS join Sach e on d.MaSach=e.MaSach
+where e.MaSach not in 
+(select MaSach from Sach
+where TenSach=N'Mắt biếc' or TenSach=N'Vợ Nhặt')
+7/ thông tin sách (mã sách, tên sách) không được nhập trong tháng 2
+select MaSach, TenSach from Sach
+where MaSach not in (select a.MaSach from Sach a join ChiTietPNS b on a.MaSach=b.MaSach
+join PhieuNhap c on b.SoCTPNS=c.SoCTPNS
+where month(NgayNhap)=2)
+
+===================================================================================
+f/hợp/ giao/ trừ: 3 câu
+1/ Cho biết tên khách hàng chỉ mua các loại sách.
+select distinct TenKH from KhachHang kh join HoaDon hd on kh.MaKH=hd.MaKH
+where not exists (select *from Sach s join ChiTietHDS ct on s.MaSach=ct.MaSach 
+where not exists(select * from HoaDon hd2
+where hd2.MaKH=hd.MaKH and (hd2.MaHDS=ct.MaHDS and ct.MaSach=s.MaSach)))
+2/ liệt kê mã, tên , địa chỉ của khách hàng mua sách vào tháng 12 năm 2020 và tháng 1 năm 2021
+select a.MaKH, TenKH, DiaChiKH from KhachHang a join HoaDon b on a.MaKH=b.MaKH
+where month(NgayBan)=12 and year(NgayBan)=2020
+intersect
+select a.MaKH, TenKH, DiaChiKH from KhachHang a join HoaDon b on a.MaKH=b.MaKH
+where month(NgayBan)=1 and year(NgayBan)=2021
+3/liệt kê thông tin nhà xuất bản xuất bản sách trong tháng 12 năm 2019 nhưng không xuất bản trong tháng 1 năm 2020
+select a.MaNXB,TenNXB from NhaXuatBan a join NhaCungCap b on a.MaNXB=b.MaNXB join PhieuNhap c on b.MaNCC=c.MaNCC
+where month(NgayNhap )=12 and year(NgayNhap )=2019 
+except 
+select a.MaNXB,TenNXB from NhaXuatBan a join NhaCungCap b on a.MaNXB=b.MaNXB join PhieuNhap c on b.MaNCC=c.MaNCC
+where month(NgayNhap )=1 and year(NgayNhap )=2019
+===================================================================================
+g/ Truy vấn Update, Delete: 
+1/ Thêm trường điện thoại(DT) trong bảng Tác giả, 
+nếu địa chỉ tác giả trùng với địa chỉ nhà xuất bản thì điện thoại phải giống nhau*/
+alter table TacGia
+add DT varchar(20)
+
+update TacGia
+set DT = DienThoai 
+from TacGia a join Sach_TG b on a.MaTG=b.MaTG join Sach c on b.MaSach=c.MaSach
+join ChiTietPNS d on c.MaSach=d.MaSach join PhieuNhap e on d.SoCTPNS=e.SoCTPNS
+join NhaCungCap f on e.MaNCC=f.MaNCC join NhaXuatBan g on f.MaNXB=g.MaNXB
+where DiaChiTG in (select DiaChiNXB from NhaXuatBan) 
+2/ Thêm trường thành tiền (ThanhTien) vào bảng chi tiết phiếu nhập sách, và tính ThanhTien (SoLuongNhapS*GiaNhapS ).
+alter table ChiTietPNS
+add ThanhTien money
+update ChiTietPNS
+set ThanhTien=SoLuongNhapS*GiaNhapS
+3/ Giảm giá bán dụng cụ 10%, khi số lượng dụng cụ trong chi tiết hóa đơn dụng cụ lớn hơn 50.
+update DungCu
+set GiaBanDC = (GiaBanDC-GiaBanDC*0.1)
+from DungCu a join ChiTietPNDC b on a.MaDC=b.MaDC
+where SoLuongNhapDC > 50
+4/ Xóa thông tin sách không được cung cấp bởi nhà cung cấp.
+delete from Sach
+where MaSach not in 
+(select d.MaSach from NhaCungCap a join PhieuNhap b on a.MaNCC=b.MaNCC
+join ChiTietPNS c on b.SoCTPNS=c.SoCTPNS join Sach d on c.MaSach=d.MaSach)
+5/ giảm giá nhập sách xuống 1 nữa cho những phiếu nhập không nhập dụng cụ
+update ChiTietPNS
+set GiaNhapS = GiaNhapS/2
+from ChiTietPNS a join PhieuNhap b on a.SoCTPNS=b.SoCTPNS 
+where SoCTPNDC is not null
+6/ xóa nhà xuất bản có địa chỉ ở "Lâm Đồng"
+delete from NhaXuatBan
+where DiaChiNXB like N'%Lâm Đồng'
+7/ Tăng số lượng nhập sách lên 10 đơn vị khi được khách hàng 'Trương Thị Thanh Hằng' mua
+update ChiTietPNDC 
+set SoLuongNhapDC=SoLuongNhapDC+10
+from  ChiTietPNDC a join DungCu b on a.MaDC=b.MaDC join ChiTietHDDC c 
+on b.MaDC=c.MaDC join HoaDon d on c.MaHDDC=d.MaHDDC join KhachHang e on d.MaKH=e.MaKH
+where TenKH=N'Trương Thị Thanh Hằng'
+===================================================================================
+
+/* Thủ tục */
+--Thêm sách mới:
+CREATE PROCEDURE pr_THEM_SACH(
+    @MaSach varchar(5),
+    @TenSach nvarchar (100),
+    @TenTG nvarchar(100),
+    @NgayXB datetime,
+    @MaTL varchar(10)
+) AS
+    BEGIN
+        insert into Sach(MaSach, TenSach, TenTG, NgayXB, MaTL)
+        values(@MaSach, @TenSach, @TenTG, @NgayXB, @MaTL)
+    END;
+	exec pr_THEM_SACH 'S011',N'Lên Cung trăng','Jules Verne ','6/7/1990','TT'
+--Xóa sách
+CREATE PROCEDURE pr_XOA_SACH(
+    @MaSach VARCHAR(5)
+) AS
+    BEGIN
+        DELETE FROM Sach
+        WHERE MaSach = @MaSach 
+    END;
+	exec pr_XOA_SACH 'S011'
+--Tìm kiếm sách theo thể loại
+CREATE PROCEDURE pr_TIM_KIEM(
+    @TenTL NVARCHAR(50)
+)AS 
+    BEGIN
+        IF(EXISTS(SELECT TenSach
+                FROM Sach a, TheLoai b
+                WHERE a.MaTL = b.MaTL and b.TenTL = @TenTL)
+                )
+            SELECT TenSach
+            FROM Sach a, TheLoai b
+            WHERE a.MaTL = b.MaTL and b.TenTL = @TenTL
+        ELSE 
+            PRINT N'Xin lỗi, nhà sách chưa mở bán thể loại sách: ' + '' + CAST(@TenTL AS NVARCHAR(50));
+    END;
+
+/* Hàm */
+--Hiển thị thứ trong tuần tương ứng với ngày tháng năm
+CREATE FUNCTION fu_Thu
+(
+	@ngay DATETIME
+)
+RETURNS NVARCHAR(10)
+AS
+     BEGIN
+          DECLARE @result NVARCHAR(10)
+          SELECT @result = CASE DATEPART(DW,@ngay)
+                        WHEN 1 THEN N'Chủ nhật'
+                        WHEN 2 THEN N'Thứ hai'
+                        WHEN 3 THEN N'Thứ ba'
+                        WHEN 4 THEN N'Thứ tư'
+                        WHEN 5 THEN N'Thứ năm'
+                        WHEN 6 THEN N'Thứ sáu'
+                        ELSE N'Thứ bảy'
+                      END   
+          RETURN (@result) 
+END;
+
+SELECT MaSach, TenSach, (dbo.fu_Thu(NgayXB) + ',' + CONVERT(nvarchar(10),NgayXB,103) )AS 'Thứ ngày đầy đủ'
+FROM Sach
+
+--Đếm số lượng phiếu nhập mà nhà cung cấp cung cấp cho nhà sách
+CREATE FUNCTION fu_DEMSLPN(@MaNCC VARCHAR(10))
+RETURNS INT  
+AS
+	BEGIN
+		DECLARE @temp INT 
+		SET @temp = (
+		SELECT COUNT(b.SoPN)
+		FROM NhaCungCap a, PhieuNhap b
+		WHERE a.MaNCC = b.MaNCC and a.MaNCC = @MaNCC)
+		RETURN @temp
+	END;
+
+select dbo.fu_DEMSLPN('NCC01')
+from NhaCungCap
+
+/* Trigger */
+--Đặt giới hạn sách nhập vào ngăn nhân viên nhập thêm sách vào
+CREATE TRIGGER tr_GH_Sach ON Sach FOR INSERT
+AS
+	IF(SELECT COUNT(MaSach) FROM Sach) > 10
+	BEGIN
+		PRINT N'Bạn không thể nhập quá 10 quyển sách'
+		ROLLBACK TRAN
+	END;
+drop trigger tr_GH_Sach
+exec pr_THEM_SACH 'S08',N'Lên Cung trăng','Jules Verne ','6/7/1990','TT'
+select* from Sach
+
+--Ngăn xoá 2 bản ghi trong bảng khách hàng đồng thời
+CREATE TRIGGER tr_DouDel ON Sach FOR DELETE
+AS
+	IF((SELECT COUNT(MaSach) FROM Sach) < 2)
+	BEGIN
+		ROLLBACK TRAN
+    END;
+
+drop trigger tr_DouDel
+select* from Sach
+delete from Sach where MaSach = 'S09' and MaSach = 'S10'
+
+--Không cho phép xóa người trên 30 tuổi
+CREATE TRIGGER tr_DelBefore ON KhachHang FOR DELETE
+AS
+	BEGIN
+		DECLARE @COUNT INT = 0;
+		SELECT @COUNT = COUNT(*) FROM KhachHang 
+		WHERE YEAR(GETDATE()) - YEAR(KhachHang.NgaySinh) > 30
+		IF(@COUNT > 0)
+		BEGIN 
+			PRINT N'Không được xóa khách hàng hơn 30 tuổi'
+			ROLLBACK TRAN
+		END;
+	END;
+
+INSERT INTO KhachHang VALUES
+('KH008',N'Đặng Thị Thảo Vy',1,N'78 Lê Hồng Phong,Nha Trang,KH','0983623678','6/24/1999'),
+	('KH009',N'Ngô Nguyễn Thành Nam',0,N'36 Nhị Hà, Nha Trang,KH','0866465293','3/29/1975')
+
+	DROP TRIGGER tr_DelBefore
+select* from KhachHang
+delete from KhachHang where MaKH ='KH009'
