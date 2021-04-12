@@ -1,5 +1,5 @@
-create database QL_BanSach_NT
-use QL_BanSach_NT
+create database QLBSACH
+use QLBSACH
 
 create table TacGia(
 	MaTG varchar(5) not null primary key,
@@ -59,7 +59,7 @@ create table ChiTietHDDC(
 create table HoaDon(
 	SoHD varchar(10) not null primary key,
 	MaHDS varchar(10) not null foreign key references ChiTietHDS(MaHDS),
-	MaHDDC varchar(10) null foreign key references ChiTietHDDC(MaHDDC),
+	/*MaHDDC varchar(10) null foreign key references ChiTietHDDC(MaHDDC),*/
 	NgayBan date,
 	MaKH varchar(10) not null foreign key references KhachHang(MaKH), 
 	)
@@ -96,7 +96,7 @@ create table ChiTietPNDC(
 create table PhieuNhap(
 	SoPN varchar(5) not null primary key,
 	SoCTPNS varchar(10) not null foreign key references ChiTietPNS(SoCTPNS),
-	SoCTPNDC varchar(10) null foreign key references ChiTietPNDC(SoCTPNDC),
+	/*SoCTPNDC varchar(10) null foreign key references ChiTietPNDC(SoCTPNDC),*/
 	NgayNhap date not null,
 	MaNCC nvarchar(10) not null foreign key references NhaCungCap(MaNCC)
 	)
@@ -189,13 +189,8 @@ INSERT INTO HoaDon VALUES
 	('HD05','CTHDS05','CTHDDC03','02/05/2020','KH005'),
 	('HD06','CTHDS06',null,'06/16/2020','KH006'),
 	('HD07','CTHDS07','CTHDDC01','09/08/2020','KH007'),
-	('HD08','CTHDS01',null,'12/20/2020','KH001'),
-	('HD09','CTHDS02',null,'01/02/2021','KH001'),
-	('HD10','CTHDS03',null,'01/20/2020','KH001'),
-	('HD11','CTHDS04',null,'01/21/2020','KH001'),
-	('HD12','CTHDS05',null,'01/22/2020','KH001'),
-	('HD13','CTHDS06',null,'01/23/2020','KH001'),
-	('HD14','CTHDS07',null,'01/24/2020','KH001')
+	('HD08','CTHDS01',null,'12/20/2020','KH001')
+	
 
 
 
@@ -266,8 +261,8 @@ CREATE PROCEDURE pr_THEM_SACH(
         values(@MaSach, @TenSach, @TenTG, @NgayXB, @MaTL)
     END;
 
-drop proc pr_THEM_SACH
-exec pr_THEM_SACH 'S011',N'Lên Cung trăng','Jules Verne ','6/7/1990','TT'
+--drop proc pr_THEM_SACH
+--exec pr_THEM_SACH 'S011',N'Lên Cung trăng','Jules Verne ','6/7/1990','TT'
 --Xóa sách
 CREATE PROCEDURE pr_XOA_SACH(
     @MaSach VARCHAR(5)
@@ -277,9 +272,9 @@ CREATE PROCEDURE pr_XOA_SACH(
         WHERE MaSach = @MaSach 
     END;
 
-drop proc pr_XOA_SACH
-select* from Sach
-delete from Sach_TG where MaSach = 'S07'
+--drop proc pr_XOA_SACH
+--select* from Sach
+--delete from Sach_TG where MaSach = 'S07'
 exec pr_XOA_SACH 'S07'
 --Tìm kiếm sách theo thể loại
 CREATE PROCEDURE pr_TIM_KIEM(
@@ -296,9 +291,10 @@ CREATE PROCEDURE pr_TIM_KIEM(
         ELSE 
             PRINT N'Xin lỗi, nhà sách chưa mở bán thể loại sách: ' + '' + CAST(@TenTL AS NVARCHAR(50));
     END;
-drop proc pr_TIM_KIEM
+--drop proc pr_TIM_KIEM
 /* Hàm */
---Hiển thị thứ trong tuần tương ứng với ngày tháng năm
+--Hiển thị thứ trong tuần tương ứng với ngày tháng năm 
+/*
 CREATE FUNCTION fu_Thu
 (
 	@ngay DATETIME
@@ -317,10 +313,10 @@ AS
                         ELSE N'Thứ bảy'
                       END   
           RETURN (@result) 
-END;
-drop function fu_Thu
-SELECT MaSach, TenSach, (dbo.fu_Thu(NgayXB) + ',' + CONVERT(nvarchar(10),NgayXB,103) )AS 'Thứ ngày đầy đủ'
-FROM Sach
+END;		 */
+--drop function fu_Thu
+--SELECT MaSach, TenSach, (dbo.fu_Thu(NgayXB) + ',' + CONVERT(nvarchar(10),NgayXB,103) )AS 'Thứ ngày đầy đủ'
+--FROM Sach
 
 --Đếm số lượng phiếu nhập mà nhà cung cấp cung cấp cho nhà sách
 CREATE FUNCTION fu_DEMSLPN(@MaNCC VARCHAR(10))
@@ -335,22 +331,22 @@ AS
 		RETURN @temp
 	END;
 
-drop function fu_DEMSLPN
-select dbo.fu_DEMSLPN('NCC01') AS 'Số lượng sách nhà cung cấp cung cấp'
-from NhaCungCap
+--drop function fu_DEMSLPN
+--select dbo.fu_DEMSLPN('NCC01') AS 'Số lượng sách nhà cung cấp cung cấp'
+--from NhaCungCap
 
 /* Trigger */
 --Đặt giới hạn sách nhập vào ngăn nhân viên nhập thêm sách vào
 CREATE TRIGGER tr_GH_Sach ON Sach FOR INSERT
 AS
-	IF(SELECT COUNT(MaSach) FROM Sach) > 10
+	IF(SELECT COUNT(MaSach) FROM Sach) > 15
 	BEGIN
 		PRINT N'Bạn không thể nhập quá 10 quyển sách'
 		ROLLBACK TRAN
 	END;
-drop trigger tr_GH_Sach
-exec pr_THEM_SACH 'S08',N'Lên Cung trăng','Jules Verne ','6/7/1990','TT'
-select* from Sach
+--drop trigger tr_GH_Sach
+--exec pr_THEM_SACH 'S08',N'Lên Cung trăng','Jules Verne ','6/7/1990','TT'
+--select* from Sach
 
 --Ngăn xoá 2 bản ghi trong bảng khách hàng đồng thời
 CREATE TRIGGER tr_DouDel ON Sach FOR DELETE
@@ -360,9 +356,9 @@ AS
 		ROLLBACK TRAN
     END;
 
-drop trigger tr_DouDel
-select* from Sach
-delete from Sach where MaSach = 'S09' and MaSach = 'S10'
+--drop trigger tr_DouDel
+--select* from Sach
+--delete from Sach where MaSach = 'S09' and MaSach = 'S10'
 
 --Không cho phép xóa người trên 30 tuổi
 CREATE TRIGGER tr_DelBefore ON KhachHang FOR DELETE
@@ -378,15 +374,15 @@ AS
 		END;
 	END;
 
-INSERT INTO KhachHang VALUES
+/*INSERT INTO KhachHang VALUES
 ('KH008',N'Đặng Thị Thảo Vy',1,N'78 Lê Hồng Phong,Nha Trang,KH','0983623678','6/24/1999'),
-	('KH009',N'Ngô Nguyễn Thành Nam',0,N'36 Nhị Hà, Nha Trang,KH','0866465293','3/29/1975')
-
+	('KH009',N'Ngô Nguyễn Thành Nam',0,N'36 Nhị Hà, Nha Trang,KH','0866465293','3/29/1975')	   */
+/*
 	DROP TRIGGER tr_DelBefore
 select* from KhachHang
-delete from KhachHang where MaKH ='KH009'
+delete from KhachHang where MaKH ='KH009'	 */
 	
-use master;
+/*use master;
 create login group3_1 with password = '123456789';
 alter login group3_1 with default_database = QL_BanSach_NT;
 use QL_BanSach_NT;
@@ -410,4 +406,4 @@ grant insert on object::Sach to group3_user3;
 
 
 create role group3_user_role;
-alter role group3_user_role add member group3_user;
+alter role group3_user_role add member group3_user;	  */
